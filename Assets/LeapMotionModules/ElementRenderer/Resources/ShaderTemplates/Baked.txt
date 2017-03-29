@@ -1,0 +1,29 @@
+﻿Shader "Hidden/<<SHADER NAME>>" {
+  Properties {
+    <<PROPERTIES>>
+  }
+  SubShader {
+    Tags {"Queue"="Geometry" "RenderType"="Opaque" }
+
+    Pass {
+      CGPROGRAM
+      <<DEFINES>>
+
+      #pragma vertex vert
+      #pragma fragment frag
+      #include "Assets/LeapMotionModules/ElementRenderer/Resources/BakedRenderer.cginc"
+      #include "UnityCG.cginc"
+
+      <<SAMPLERS>>
+      
+      v2f_gui_baked vert (appdata_gui_baked v) {
+        return ApplyBakedGui(v);
+      }
+      
+      fixed4 frag (v2f_gui_baked i) : SV_Target {
+        <<FRAGMENT CODE>>
+      }
+      ENDCG
+    }
+  }
+}
